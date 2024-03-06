@@ -46,7 +46,11 @@ class Decoder(nn.Module):
 
 
 class DSINE(nn.Module):
-    def __init__(self):
+    def __init__(self,
+                 # TODO: modified, add more parameters
+                 h: int = 2000,
+                 w: int = 2000,
+                 ):
         super(DSINE, self).__init__()
         self.downsample_ratio = 8
         self.ps = 5           # patch size
@@ -67,8 +71,10 @@ class DSINE(nn.Module):
         # pixel_coords (1, 3, H, W)
         # NOTE: this is set to some arbitrarily high number, 
         # if your input is 2000+ pixels wide/tall, increase these values
-        h = 2000
-        w = 2000
+        # TODO: modified, use h and w parameters
+        # h = 2000
+        # w = 2000
+
         pixel_coords = np.ones((3, h, w)).astype(np.float32)
         x_range = np.concatenate([np.arange(w).reshape(1, w)] * h, axis=0)
         y_range = np.concatenate([np.arange(h).reshape(h, 1)] * w, axis=1)
